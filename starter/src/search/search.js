@@ -12,22 +12,16 @@ function Search() {
   useEffect(() => {
     let mounted = true;
     if (searchter.length > 0) {
-      search(searchter, 10)
-        .then((books) => {
-          if (mounted) {
-            console.log(books);
-            if (books.error) {
-              books = [];
-              setBooks(books);
-              console.log(books + " ERRR " + searchter);
-            } else {
-              setBooks(books);
-            }
+      search(searchter, 10).then((books) => {
+        if (mounted) {
+          if (books.error) {
+            books = [];
+            setBooks(books);
+          } else {
+            setBooks(books);
           }
-        })
-        .catch((error) => {
-          console.log(error + " " + searchter);
-        });
+        }
+      });
     } else {
       setBooks([]);
     }

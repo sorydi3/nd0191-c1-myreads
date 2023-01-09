@@ -14,5 +14,4 @@ function Bookself({ books, shelf, title, onShelfChange }) {
     </div>
   );
 }
-
 export default Bookself;

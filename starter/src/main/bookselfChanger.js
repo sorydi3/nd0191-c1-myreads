@@ -2,7 +2,6 @@ import React from "react";
 import { get, update } from "./../utils/BooksAPI";
 
 function updateState(idBook, value, onShelfChange) {
-  console.log(idBook + " " + value);
   get(idBook).then((book) => {
     update(book, value).then(() => {
       if (onShelfChange) onShelfChange();
@@ -12,7 +11,6 @@ function updateState(idBook, value, onShelfChange) {
 
 function Changer({ idBook, onShelfChange }) {
   const handleChange = (event) => {
-    console.log(event.target.value);
     updateState(idBook, event.target.value, onShelfChange);
   };
 

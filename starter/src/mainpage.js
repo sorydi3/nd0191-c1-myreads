@@ -8,7 +8,6 @@ const shelfs = ["currentlyReading", "wantToRead", "read"];
 function getAllbooks(setBooks) {
   getAll().then((books) => {
     setBooks(books);
-    //console.log(books);
   });
 }
 

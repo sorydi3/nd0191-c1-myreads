@@ -4,7 +4,6 @@ import { useState } from "react";
 
 function updateState(idBook, value, onShelfChange, shelf) {
   get(idBook).then((book) => {
-    console.log(book);
     update(shelf !== undefined ? { ...book, shelf } : book, value).then(() => {
       if (onShelfChange) onShelfChange();
     });

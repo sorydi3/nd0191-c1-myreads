@@ -29,8 +29,11 @@ function Changer({ idBook, onShelfChange }) {
 
   return (
     <div className="book-shelf-changer">
-      <select value={book.shelf} onChange={handleChange}>
-        <option value="none" disabled>
+      <select
+        value={book.shelf !== undefined ? book.shelf : "none"}
+        onChange={handleChange}
+      >
+        <option value="nonee" disabled>
           Move to...
         </option>
         <option value="none">None</option>

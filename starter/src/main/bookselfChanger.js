@@ -1,22 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { get, update } from "./../utils/BooksAPI";
+import { useState } from "react";
 
-function updateState(idBook, value, onShelfChange) {
+function updateState(idBook, value, onShelfChange, shelf) {
   get(idBook).then((book) => {
-    update(book, value).then(() => {
+    update(shelf !== undefined ? { ...book, shelf } : book, value).then(() => {
       if (onShelfChange) onShelfChange();
     });
   });
 }
 
 function Changer({ idBook, onShelfChange }) {
+  const [book, setBook] = useState({});
   const handleChange = (event) => {
     updateState(idBook, event.target.value, onShelfChange);
   };
 
+  useEffect(() => {
+    let mounted = true;
+    get(idBook).then((book) => {
+      if (mounted) setBook(book);
+    });
+
+    return () => {
+      mounted = false;
+    };
+  });
+
   return (
     <div className="book-shelf-changer">
-      <select onChange={handleChange}>
+      <select value={book.shelf} onChange={handleChange}>
         <option value="none" disabled>
           Move to...
         </option>

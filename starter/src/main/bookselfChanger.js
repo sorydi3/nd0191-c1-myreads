@@ -4,6 +4,7 @@ import { useState } from "react";
 
 function updateState(idBook, value, onShelfChange, shelf) {
   get(idBook).then((book) => {
+    console.log(book);
     update(shelf !== undefined ? { ...book, shelf } : book, value).then(() => {
       if (onShelfChange) onShelfChange();
     });
@@ -29,8 +30,11 @@ function Changer({ idBook, onShelfChange }) {
 
   return (
     <div className="book-shelf-changer">
-      <select value={book.shelf} onChange={handleChange}>
-        <option value="none" disabled>
+      <select
+        value={book.shelf !== undefined ? book.shelf : "none"}
+        onChange={handleChange}
+      >
+        <option value="nonee" disabled>
           Move to...
         </option>
         <option value="none">None</option>
